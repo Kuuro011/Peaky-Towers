@@ -81,7 +81,7 @@ public class PlayerMovements : MonoBehaviour
 
         dirX = Input.GetAxisRaw("Horizontal");
 
-        if (isGrounded())
+        if (IsGrounded())
         {
             coyoteTimeCounter = coyoteTime;
         }
@@ -121,8 +121,8 @@ public class PlayerMovements : MonoBehaviour
         }
 
 
-        wallSlide();
-        wallJump();
+        WallSlide();
+        WallJump();
         Flip();
 
         UpdateAnimation();
@@ -150,20 +150,20 @@ public class PlayerMovements : MonoBehaviour
         }
     }
 
-    private bool isGrounded()
+    private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, jumpableGround);
     }
 
 
-    private bool isWalled()
+    private bool IsWalled()
     {
         return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);
     }
 
-    private void wallSlide()
+    private void WallSlide()
     {
-        if (isWalled() && !isGrounded() && dirX != 0f)
+        if (IsWalled() && !IsGrounded() && dirX != 0f)
         {
             isWallSlidable = true;
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
@@ -175,7 +175,7 @@ public class PlayerMovements : MonoBehaviour
         }
     }
 
-    private void wallJump()
+    private void WallJump()
     {
         if (isWallSlidable)
         {
