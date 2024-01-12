@@ -1,21 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
     // Start is called before the first frame update
-    private Rigidbody rb;
+    private Rigidbody2D rb;
     private Animator Animator;
+
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Trao"))
+        if (collision.gameObject.CompareTag("Trap"))
         {
             Die();
         }
@@ -23,6 +25,8 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        Animator.SetTrigger("Death");
+        rb.bodyType = RigidbodyType2D.Static;
     }
+
+
 }
