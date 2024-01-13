@@ -25,6 +25,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
+        Animator.SetTrigger("Death");
         rb.bodyType = RigidbodyType2D.Static;
     }
 
