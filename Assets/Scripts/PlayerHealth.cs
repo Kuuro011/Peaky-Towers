@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
     // Start is called before the first frame update
+    public static event Action OnPlayerDeath;
     private Rigidbody2D rb;
     private Animator Animator;
 
@@ -27,6 +29,7 @@ public class PlayerHealth : MonoBehaviour
     {
         Animator.SetTrigger("Death");
         rb.bodyType = RigidbodyType2D.Static;
+        OnPlayerDeath.Invoke();
     }
 
 

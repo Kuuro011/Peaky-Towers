@@ -10,7 +10,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private LayerMask EnemyLayer;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask Ground;
-    [SerializeField] private int atkDamage;
+    private int atkDamage = 10;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -46,7 +46,7 @@ public class PlayerAttack : MonoBehaviour
 
         foreach(Collider2D enemies in hitEnemies)
         {
-           // enemies.GetComponent<Enemy>().TakeDamage(atkDamage);
+           enemies.GetComponent<Enemy>().TakeDamage(atkDamage);
         }
     }
 
@@ -58,7 +58,7 @@ public class PlayerAttack : MonoBehaviour
 
         foreach (Collider2D enemies in hitEnemies)
         {
-            //enemies.GetComponent<Enemy>().TakeDamage(atkDamage);
+            enemies.GetComponent<Enemy>().TakeDamage(atkDamage);
         }
     }
 
@@ -70,7 +70,7 @@ public class PlayerAttack : MonoBehaviour
 
         foreach (Collider2D enemies in hitEnemies)
         {
-           // enemies.GetComponent<Enemy>().TakeDamage(atkDamage);
+           enemies.GetComponent<Enemy>().TakeDamage(atkDamage);
         }
     }
 
