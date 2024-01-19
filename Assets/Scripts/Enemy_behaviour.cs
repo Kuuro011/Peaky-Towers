@@ -30,6 +30,8 @@ public class Enemy_behaviour : MonoBehaviour
     private bool inRange; //Check if Player is in range
     private bool cooling; //Check if Enemy is cooling after attack
     private float intTimer;
+    [SerializeField] private int maxHealth;
+    private int currentHealth;
     #endregion
 
     void Awake()
@@ -201,5 +203,21 @@ public class Enemy_behaviour : MonoBehaviour
         //rotation.y = (currentTarget.position.x < transform.position.x) ? rotation.y = 180f : rotation.y = 0f;
 
         transform.eulerAngles = rotation;
+    }
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        anim.SetTrigger("isHurt");
+        Debug.Log("HIt");
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        anim.SetBool("isDead", true);
+        Debug.Log("Dead");
     }
 }

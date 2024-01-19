@@ -7,14 +7,17 @@ using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
     // Start is called before the first frame update
-    public static event Action OnPlayerDeath;
     private Rigidbody2D rb;
     private Animator Animator;
+    private int maxHealth = 100;
+    private int health;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
+
+        health = maxHealth;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -22,6 +25,18 @@ public class PlayerHealth : MonoBehaviour
         if (collision.gameObject.CompareTag("Trap"))
         {
             Die();
+
+        }
+    }
+
+    public void TakeDamaage(int damage)
+    {
+        health -= damage;
+        if (health <= 0) 
+        {
+            Die();
+            Debug.Log("hit");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 
@@ -29,7 +44,12 @@ public class PlayerHealth : MonoBehaviour
     {
         Animator.SetTrigger("Death");
         rb.bodyType = RigidbodyType2D.Static;
-        OnPlayerDeath.Invoke();
+        Invoke("GameOver", 3);
+    }
+
+    private void GameOver()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 
